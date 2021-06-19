@@ -52,3 +52,30 @@ res = (function (a, b) {
 
 console.log(res);   // 15
 ```
+
+# 14장 전역 변수의 문제점
+
+## 14.1.1 지역 변수의 생명 주기
+
+[예제 14-02]
+
+``` javascript
+var x = 'global';
+
+function foo() {
+    consoel.log(x); // ??
+    var x = 'local';
+}
+
+foo();
+console.log(x); // global
+```
+
+출력은 undefined.
+x는 foo() 함수 내부에서 선언과 동시에 undefined로 초기화됨. 전역 변수 x를 참조하지 않고 지역변수 x를 참조함.
+
+## 14.1.2 전역 변수의 생명 주기
+
+전역 객체 (global object)
+
+> ... 전역 객체는 클라이언트 사이드 환경(브라우저)에서는 window, 서버 사이드 환경(Node.js)에서는 global 객체를 의미한다. 환경에 따라 전역 객체를 가리키는 다양한 식별자(window, self, this, frames, global)가 존재했으나 ES11에서 globalThis로 통일되었다.
