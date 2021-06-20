@@ -372,3 +372,67 @@ console.log(person); // { name: "Lee" }
 Object.defineProperty(person, 'name', { configurable: true });
 // TypeError: Cannot redefine property: name
 ```
+
+# 17장 생성자 함수에 의한 객체 생성
+
+## 17.2 생성자 함수
+
+### 17.2.5 constructor와 non-constructor의 구분
+
+- constructor: 함수 선언문, 함수 표현식, 클래스(클래스도 함수다)
+- non-constructor: 메서드(ES6 메소드 축약 표현), 화살표 함수
+
+[예제 17-15]
+
+``` javascript
+// 일반 함수 정의: 함수 선언문, 함수 표현식
+function foo() {}
+const bar = function () {};
+// 프로퍼티 x의 값으로 할당된 것은 일반 함수로 정의된 함수다. 이는 메서드로 인정하지 않는다.
+const baz = {
+    x: function () {}
+};
+
+// 일반 함수로 정의된 함수만이 constructor다.
+new foo(); // -> foo {}
+new bar(); // -> bar {}
+new baz.x(); // -> x {}
+
+// 화살표 함수 정의
+const arrow = () => {};
+
+new arrow(); // TypeError: arrow is not a constructor
+
+// 메서드 정의: ES6의 메서드 축약 표현만 메서드로 인정한다.
+const obj = {
+    x() {}
+};
+
+new obj.x(); // TypeError: obj.x is not a constructor
+```
+
+### 17.2.7 new.target
+
+함수 내부에서 new.target을 사용하여 new 연산자와 생성자 함수로서 호출했는지 확인
+
+[예제 17-19]
+
+``` javascript
+// 생성자 함수
+function Circle(radius) {
+    // 이 함수가 new 연산자와 함께 호출되지 않았다면 new.target은 undefined다.
+    if (!new.target) {
+        // new 연산자와 함께 생성자 함수를 재귀 호출하여 생성된 인스턴스를 반환한다.
+        return new Circle(radius);
+    }
+
+    this.radius = radius;
+    this.getDiameter = function () {
+        return 2 * this.radius;
+    };
+}
+
+// new 연산자 없이 생성자 함수를 호출하여도 new.target을 통해 생성자 함수로서 호출된다.
+const circle = Circle(5);
+console.log(circle.getDiameter());
+```
