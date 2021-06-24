@@ -202,3 +202,51 @@ foo === null; // true
 break : 반복문(for, for...in, for...of, while, do...while) 또는 switch문의 코드 블록을 탈출한다.
 continue : 반복문의 코드 블록 실행을 현 시점에서 중단하고 반복문의 증감식으로 실행 흐름을 이동시킨다.
 ```
+
+## 8. 타입변환
+---   
+
+### 암묵적 타입 변환
+```javascript
+//문자열 타입으로 변환
+1 + '2' // '12'
+// ES6에서 도입된 템플릿 리터럴의 표현식 삽입은 표현식의 평가 결과를 암묵적으로 문자열 타입으로 변환한다.
+`1 + 1 = ${1 + 1}` // "1 + 1 = 2"
+
+// 숫자열 타입으로 변환
+1 - '1' // 0
+1 * '10' // 10
+1/ 'one' // NaN
+
+// 불리언 타입으로 변환(false, undefined, null, 0, -0, NaN, ''빈문자열 제외 하고 모두 True)
+if(!false) console.log(false + ' is falsy value'); // True
+if(!'') console.log('' + ' is falsy value'); // True
+```
+### 명시적 타입 변환
+```javascript
+/*문자열 타입으로 변환*/
+
+// 1. String 생성자 함수를 new 연산자 업이 호출하는 방법
+String(1); // "1"
+String(NaN); // "NaN"
+// 2. object.prototype.toString메서드를 사용하는 방법
+(1).toString(); // "1"
+(true).toString(); // "true"
+// 3. 문자열 연결 연산자를 이용하는 방법
+1 + ''; // "1"
+true + ''; // "true"
+
+/*숫자 타입으로 변환*/
+// 1. Number 생성자 함수를 new 연산자 없이 호출하는방법
+Number('0'); // 0
+Number('10.53'); // 10.53
+// 2.parseInt, parseFloat 함수를 사용하는방법(문자열만 숫자 타입으로 변환 가능)
+parseInt('0'); // 0
+parseFloat('10.53') // 10.53
+// 3. + 단항 산술 연산자를 이용하는 방법
++ '4'; // 4
++ '10.53'; // 10.53
+// 4. * 산술 연산자를 이용하는 방법
+'0' * 1; // 0
+'-1' * 1; // -1
+```
