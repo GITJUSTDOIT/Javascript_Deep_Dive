@@ -103,3 +103,35 @@ class Person {
 const person = new Person();
 person.sayHi(); // Hi Lee
 ```
+
+# 27장 배열
+
+## 27.8 배열 메서드
+
+### 27.8.3 Array.prototype.push
+
+스프레드 문법을 사용하면 함수 호출 없이 표현식으로 마지막에 요소를 추가할 수 있으며 부수 효과도 없다.
+
+[예제 27-48]
+
+``` javascript
+const arr = [1, 2];
+
+// ES6 스프레드 문법
+const newArr = [...arr, 3];
+console.log(newArr);    // [1, 2, 3]
+```
+
+### 27.9.5 Array.prototype.reduce
+
+중복되지 않는 유일한 값들의 집합인 Set을 사용하면 중복 요소를 제거할 수 있다.
+
+[예제 27-112]
+
+``` javascript
+const values = [1, 2, 1, 3, 5, 4, 5, 3, 4, 4];
+
+// 중복을 허용하지 않는 Set 객체의 특성을 활용하여 배열에서 중복된 요소를 제거할 수 있다.
+const result = [...new Set(values)];
+console.log(result);    // [1, 2, 3, 5, 4]
+```
