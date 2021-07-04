@@ -20,7 +20,7 @@ top: 스택의 가장 위에 있는 정수를 출력한다. 만약 스택에 들
 
 ---
 
-#정답
+# 정답
 ```javascript
 //const input = require("fs").readFileSync("/dev/stdin").toString().trim().split("\n");
 
