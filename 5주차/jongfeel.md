@@ -345,3 +345,43 @@ const user = {
 const { address: { city } } = user;
 console.log(city);  // 'Seoul'
 ```
+
+# 37장 Set과 Map
+
+## 37.1 Set
+
+### 37.1.1 Set 객체의 생성
+
+중복을 허용하지 않는 Set 객체의 특성을 활용하여 배열에서 중복된 요소를 제거할 수 있다.
+
+[예제 37-03]
+
+``` javascript
+// 배열의 중복 요소 제거
+const uniq = array => array.filter((v, i, self) => self.indexOf(v) === i);
+console.log(uniq([2, 1, 2, 3, 4, 3, 4]));   // [2, 1, 3, 4]
+
+// Set 을 사용한 배열의 중복 요소 제거
+const uniq = array => [...new Set(array)];
+console.log(uniq([2, 1, 2, 3, 4, 3, 4]));   // [2, 1, 3, 4]
+```
+
+### 37.1.8 집합연산
+
+- 교집합, Set.intersection()
+- 합집합, Set.union()
+- 차집합, Set.difference()
+- 부분 집합과 상위 집합, Set.isSuperSet()
+
+## 37.2 Map
+
+### 37.2.1 객체의 생성
+
+[예제 37-27]
+
+``` javascript
+const map1 = new Map([['key1', 'value1'], ['key2', 'value2']]);
+console.log(map1);  // Map(2) { "key1" => "value1", "key2" => "value2" }
+
+const map2 = new Map([1, 2]);   // TypeError: Iterator value 1 is not an entry object
+```
