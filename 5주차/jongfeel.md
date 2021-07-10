@@ -179,3 +179,65 @@ console.log(iter.next());   // { value: 5, done: false }
 console.log(iter.next());   // { value: 8, done: false }
 console.log(iter.next());   // { value: 13, done: true }
 ```
+
+# 35장 스프레드 문법
+
+## 35.1 함수 호출문의 인수 목록에서 사용하는 경우
+
+[예제 35-07]
+
+``` javascript
+const arr = [1, 2, 3];
+
+// 스프레드 문법을 사용하여 배열 arr을 1, 2, 3으로 펼쳐서 Math.max에 전달한다.
+// Math.max(...[1, 2, 3])은 Math.max(1, 2, 3)과 같다.
+const max = Math.max(...arr);   // -> 3
+```
+
+## 35.2 배열 리터럴 내부에서 사용하는 경우
+
+### 35.2.1 concat
+
+[예제 35-10]
+
+``` javascript
+// ES6
+const arr = [...[1, 2], ...[3, 4]];
+console.log(arr);   // [1, 2, 3, 4]
+```
+
+### 35.2.2 splice
+
+[예제 35-13]
+
+``` javascript
+// ES6
+const arr1 = [1, 4];
+const arr2 = [2, 3];
+
+arr1.splice(1, 0, ...arr2);
+console.log(arr1);  // [1, 2, 3, 4]
+```
+
+## 35.3 객체 리터럴 내부에서 사용하는 경우
+
+스프레드 프로퍼티는 Object.assign 메서드를 대체할 수 있는 간편한 문법이다.
+
+[예제 35-24]
+
+``` javascript
+// 객체 병합, 프로퍼티가 중복되는 경우 뒤에 위치한 프로퍼티가 우선권을 갖는다.
+const merged = { ...{ x: 1, y: 2 }, ...{ y: 10, z: 3 } };
+console.log(merged);    // { x: 1, y: 10, z: 3}
+
+// 특정 프로퍼티 변경
+const changed = { ... { x: 1, y: 2 }, y: 100 };
+// changed = { ... { x: 1, y: 2 }, ...{ y: 100 } };
+console.log(changed); // { x: 1, y: 100 }
+
+// 프로퍼티 추가
+const added = { ... { x: 1, y: 2 }, z: 0 };
+// added = { ... { x: 1, y: 2 }, ... { z: 0 } };
+console.log(added); // { x: 1, y: 2, z: 0 }
+```
+
