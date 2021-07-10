@@ -241,3 +241,107 @@ const added = { ... { x: 1, y: 2 }, z: 0 };
 console.log(added); // { x: 1, y: 2, z: 0 }
 ```
 
+# 36장 디스트럭처링 할당
+
+## 36.1 배열 디스트럭처링 할당
+
+[예제 36-02]
+
+``` javascript
+const arr = [1, 2, 3];
+
+// ES6 배열 디스트럭처링 할당
+// 변수 one, two, three를 선언하고 배열 arr을 디스트럭처링 하여 할당한다.
+// 이때 할당 기준은 배열의 인덱스다.
+const [one, two, three] = arr;
+
+console.log(one, two, three);   // 1, 2, 3
+```
+
+배열 디스트럭처링 할당을 위한 변수에 기본값을 설정할 수 있다.
+
+[예제 36-07]
+
+``` javascript
+// 기본값
+const [a, b, c = 3] = [1, 2];
+console.log(a, b, c);   // 1, 2, 3
+
+// 기본값보다 할당된 값이 우선한다.
+const [e, f = 10, g = 3] = [1, 2];
+console.log(e, f, g);   // 1, 2, 3
+```
+
+배열 디스트럭처링 할당을 위한 변수에 Rest 파라미터와 유사하게 Rest 요소 ...을 사용할 수 있다.\
+Rest 요소는 Rest 파라미터와 마찬가지로 반드시 마지막에 위치해야 한다.
+
+[예제 36-09]
+
+``` javascript
+// Rest 요소
+const [x, ...y] = [1, 2, 3];
+console.log(x, y);  // 1 [2, 3]
+```
+
+## 36.2 객체 디스트럭처링 할당
+
+[예제 36-11]
+
+``` javascript
+const user = { firstName: 'Jongfeel', lastName: 'Kim' };
+
+// ES6 객체 디스트럭처링 할당
+// 변수 lastName, firstName을 선언하고 user 객체를 디스트럭처링하여 할당한다.
+// 이때 프로퍼티 키를 기준으로 디스트럭처링 할당이 이루어진다. 순서는 의미가 없다.
+const { lastName, firstName } = user;
+console.log(firstName, lastName);   // Jongfeel Kim
+```
+
+객체의 프로퍼티 키와 다른 변수 이름으로 프로퍼티 값을 할당받으려면 다음과 같이 변수를 선언한다.
+
+[예제 36-15]
+
+``` javascript
+const user = { firstName: 'Jongfeel', lastName: 'Kim' };
+
+// 프로퍼티 키를 기준으로 디스트럭처링 할당이 이루어진다.
+// 프로퍼티 키가 lastName인 프로퍼티 값을 ln에 할당하고,
+// 프로퍼티 키가 firstName인 프로퍼티 값을 fn에 할당한다.
+const { lastName: ln, firstName: fn } = usr;
+
+console.log(fn, ln); // Jongfeel Kim
+```
+
+객체 디스트럭처링 할당은 객체에서 프로퍼티 키로 필요한 프로퍼티 값만 추출하여 변수에 할당하고 싶을 때 유용하다.
+
+[예제 36-17]
+
+``` javascript
+const str = 'Hello';
+// String 래퍼 객체로부터 length 프로퍼티만 추출한다.
+const { length } = str;
+console.log(length); // 5
+
+const todo = { id: 1, content: 'HTML', completed: true };
+// todo 객체로부터 id 프로퍼티만 추출한다.
+const { id } = todo;
+console.log(id); // 1
+```
+
+중첩 객체의 경우
+
+[예제 36-21]
+
+``` javascript
+const user = {
+    name: 'Lee',
+    address: {
+        zipCode: '03068',
+        city: 'Seoul'
+    }
+};
+
+// address 프로퍼티 키로 객체를 추출하고 이 객체의 city 프로퍼티 키로 값을 추출한다.
+const { address: { city } } = user;
+console.log(city);  // 'Seoul'
+```
