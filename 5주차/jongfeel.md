@@ -385,3 +385,15 @@ console.log(map1);  // Map(2) { "key1" => "value1", "key2" => "value2" }
 
 const map2 = new Map([1, 2]);   // TypeError: Iterator value 1 is not an entry object
 ```
+
+# 38장 브라우저의 렌더링 과정
+
+## 38.2 HTTP 1.0과 HTTP 2.0
+
+- HTTP/1.1은 커넥션당 하나의 요청과 응답만 처리
+- HTTP/2.0은 커넥션당 여러개의 요청과 응답, 즉 다중 요청/응답이 가능, 페이지 로드 속도가 약 50% 정도 빠름
+
+## 38.9 script 태그의 async/defer 어트리뷰트
+
+- async 어트리뷰트: HTML 파싱과 외부 자바스크립트 파일의 로드가 비동기적으로 동시에 진행된다. 단, 자바스크립트의 파싱과 실행은 자바스크립트 파일의 로드가 완료된 직후 진행되며, 이때 HTML 파싱이 중단된다.
+- defer 어트리뷰트: async 어트리뷰트와 마찬가지로 HTML 파싱과 외부 자바스크립트 파일의 로드가 비동기적으로 동시에 진행된다. 단, 자바스크립트의 파싱과 실행은 HTML 파싱이 완료된 직후, 즉 DOM 생성이 완료된 직후(이때 DOMContentLoaded 이벤트가 발생한다) 진행된다.
